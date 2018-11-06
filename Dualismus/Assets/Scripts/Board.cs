@@ -55,10 +55,6 @@ public class Board : MonoBehaviour {
             {
                 AllTiles[i, j] = Instantiate(TilePrefab, transform);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
-                if (i == j)
-                {
-                    AllTiles[i, j].ChangeTileType(TileType.Tree);
-                }
                 AllTiles[i, j].transform.position = GetWorldPosition(i,j);
             }
         }
@@ -74,8 +70,8 @@ public class Board : MonoBehaviour {
             }
             while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
 
-            AllTiles[x, y].TileData.Tiletype = TileType.Tree;
-            AllTiles[x, y].name = "Tree" + AllTiles[x, y].name;
+            AllTiles[x, y].ChangeTileType(TileType.Tree);
+
         }
     }
 

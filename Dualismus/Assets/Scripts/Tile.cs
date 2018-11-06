@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour {
 
     public void SyncVisual()
     {
-        gameObject.name = "Tile {" + TileData.Coordinates.x + "},{" + TileData.Coordinates.y + "}";
+        gameObject.name = string.Format("{0}Tile {1},{2}", TileData.Tiletype.ToString(), TileData.X, TileData.Y);
 
         foreach (Transform child in Holder.transform)
         {
@@ -121,7 +121,6 @@ public class Tile : MonoBehaviour {
     public void GrowTree()
     {
         ChangeTileType(TileType.Tree);
-
     }
 
     public void CutTree()
