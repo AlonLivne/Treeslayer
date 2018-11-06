@@ -21,6 +21,9 @@ public class TileData
 public class Tile : MonoBehaviour {
     public TileData TileData;
 
+    public Transform Holder;
+    public GameObject TreeVisualPrefab;
+    public GameObject CityVisualPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +39,22 @@ public class Tile : MonoBehaviour {
     {
         TileData.Coordinates = new Vector2Int(x, y);
         ChangeTileType(type);
-        gameObject.name = "Tile {" + x + "},{" + y + "}";
+    }
+
+    public void SyncVisual()
+    {
+        gameObject.name = "Tile {" + TileData.Coordinates.x + "},{" + TileData.Coordinates.y + "}";
+
+        foreach (Transform child in Holder.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        if (TileData.Tiletype == TileType.Tree)
+        {
+            Instantiate(TreeVisualPrefab, transform);
+        }
+
     }
 
     public void PlayTurn()
@@ -100,6 +118,7 @@ public class Tile : MonoBehaviour {
     public void ChangeTileType(TileType newType)
     {
         TileData.Tiletype = newType;
+        SyncVisual();
     }
     
 }
