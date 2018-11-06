@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tree : MonoBehaviour {
-    public Vector2Int
+
 	// Use this for initialization
 	void Start () {
 		

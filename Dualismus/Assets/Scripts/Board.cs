@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Board : MonoBehaviour {
 
-    int BoardSizeX;
-    int BoardSizeY;
+    public int BoardSizeX;
+    public int BoardSizeY;
+    public int TreesStartingNumber = 5;
+
     public static Board Singleton;
 
     public Tile[,] AllTiles;
@@ -16,6 +18,7 @@ public class Board : MonoBehaviour {
     {
         Singleton = this;
         AllTiles = new Tile[BoardSizeX , BoardSizeY];
+        SetUpBoard();
     }
 
     // Use this for initialization
@@ -42,6 +45,21 @@ public class Board : MonoBehaviour {
                 AllTiles[i, j] = Instantiate(TilePrefab, this.transform);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
             }
+        }
+
+        for (int i = 0; i < TreesStartingNumber; i++)
+        {
+            int x = 0;
+            int y = 0;
+            do
+            {
+                x = Random.Range(0, BoardSizeX);
+                y = Random.Range(0, BoardSizeY);
+            }
+            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
+
+            AllTiles[x, y].TileData.Tiletype = TileType.Tree;
+            AllTiles[x, y].name = "Tree" + AllTiles[x, y].name;
         }
     }
 

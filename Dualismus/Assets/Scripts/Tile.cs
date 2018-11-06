@@ -36,6 +36,7 @@ public class Tile : MonoBehaviour {
     {
         TileData.Coordinates = new Vector2Int(x, y);
         ChangeTileType(type);
+        gameObject.name = "Tile {" + x + "},{" + y + "}";
     }
 
     public void PlayTurn()
