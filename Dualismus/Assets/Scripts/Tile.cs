@@ -53,15 +53,20 @@ public class Tile : MonoBehaviour {
 
     public void TryExpanding()
     {
-        int _destinationX = TileData.Coordinates.x + UnityEngine.Random.Range(-1, 1);
-        int _destinationY = TileData.Coordinates.y + UnityEngine.Random.Range(-1, 1);
+        int destinationX = 0;
+        int destinationY = 0;
+        while (destinationX == 0 & destinationY == 0)
+        {
+            destinationX = TileData.Coordinates.x + UnityEngine.Random.Range(-1, 1);
+            destinationY = TileData.Coordinates.y + UnityEngine.Random.Range(-1, 1);
+        }
 
-        if (Board.IsIndexInBoard(_destinationX,_destinationY))
+        if (Board.IsIndexInBoard(destinationX, destinationY))
         {
             FailGrow();
         }
 
-        Board.Singleton.AllTiles[_destinationX, _destinationY].TryGrowTree();
+        Board.Singleton.AllTiles[destinationX, destinationY].TryGrowTree();
 
     }
 
