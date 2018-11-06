@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Board : MonoBehaviour {
 
-    public int BoardSizeX;
-    public int BoardSizeY;
+
+    public float BoardSize = 6f;
+    private float _tileSize;
+    public int TileCountX = 8;
+    public int TileCountY = 8;
     public int TreesStartingNumber = 5;
 
     public static Board Singleton;
@@ -16,8 +19,9 @@ public class Board : MonoBehaviour {
 
     private void Awake()
     {
+        _tileSize = BoardSize / TileCountX;
         Singleton = this;
-        AllTiles = new Tile[BoardSizeX , BoardSizeY];
+        AllTiles = new Tile[TileCountX , TileCountY];
         SetUpBoard();
     }
 
@@ -28,7 +32,7 @@ public class Board : MonoBehaviour {
 	
     public static bool IsIndexInBoard(int x, int y)
     {
-        if (x < 0 || y < 0 || y >= Singleton.BoardSizeY || x >= Singleton.BoardSizeY)
+        if (x < 0 || y < 0 || y >= Singleton.TileCountY || x >= Singleton.TileCountY)
         {
             return false;
         }
@@ -36,14 +40,26 @@ public class Board : MonoBehaviour {
         return true;
     }
 
+    public Vector3 GetWorldPosition(int x, int y)
+    {
+        return new Vector3(
+            x * _tileSize - BoardSize / 2 + _tileSize / 2,
+            BoardSize / 2 - y * _tileSize - _tileSize / 2);
+    }
+
     private void SetUpBoard()
     {
-        for (int i = 0; i<BoardSizeX; i++)
+        for (int i = 0; i<TileCountX; i++)
         {
-            for (int j = 0; j < BoardSizeY; j++)
+            for (int j = 0; j < TileCountY; j++)
             {
                 AllTiles[i, j] = Instantiate(TilePrefab, transform);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
+                if (i == j)
+                {
+                    AllTiles[i, j].ChangeTileType(TileType.Tree);
+                }
+                AllTiles[i, j].transform.position = GetWorldPosition(i,j);
             }
         }
 
@@ -53,8 +69,8 @@ public class Board : MonoBehaviour {
             int y = 0;
             do
             {
-                x = Random.Range(0, BoardSizeX);
-                y = Random.Range(0, BoardSizeY);
+                x = Random.Range(0, TileCountX);
+                y = Random.Range(0, TileCountY);
             }
             while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
 
