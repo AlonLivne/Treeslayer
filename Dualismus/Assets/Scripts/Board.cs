@@ -42,7 +42,7 @@ public class Board : MonoBehaviour {
         {
             for (int j = 0; j < BoardSizeY; j++)
             {
-                AllTiles[i, j] = Instantiate(TilePrefab, this.transform);
+                AllTiles[i, j] = Instantiate(TilePrefab, transform);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
             }
         }
@@ -78,7 +78,10 @@ public class Board : MonoBehaviour {
         {
             tree.PlayTurn();
         }
+
+
     }
+
 
 	// Update is called once per frame
 	void Update () {

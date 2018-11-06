@@ -8,13 +8,13 @@ public enum TileType
     Clear,
     Tree,
     Building,
-    CutTree
 }
 
 [Serializable]
 public class TileData
 {
-    public Vector2Int Coordinates;
+    public int X;
+    public int Y;
     public TileType Tiletype;
 }
 
@@ -34,7 +34,8 @@ public class Tile : MonoBehaviour {
 
     public void Init(int x, int y, TileType type)
     {
-        TileData.Coordinates = new Vector2Int(x, y);
+        TileData.X = x;
+        TileData.Y = y;
         ChangeTileType(type);
         gameObject.name = "Tile {" + x + "},{" + y + "}";
     }
@@ -57,11 +58,12 @@ public class Tile : MonoBehaviour {
         int destinationY = 0;
         while (destinationX == 0 & destinationY == 0)
         {
-            destinationX = TileData.Coordinates.x + UnityEngine.Random.Range(-1, 1);
-            destinationY = TileData.Coordinates.y + UnityEngine.Random.Range(-1, 1);
+            destinationX = TileData.X + UnityEngine.Random.Range(-1, 1);
+            destinationY = TileData.Y + UnityEngine.Random.Range(-1, 1);
         }
 
-        if (Board.IsIndexInBoard(destinationX, destinationY))
+        if (!Board.IsIndexInBoard(destinationX, destinationY) 
+            || Board.Singleton.AllTiles[destinationX, destinationY].TileData.Tiletype != TileType.Clear)
         {
             FailGrow();
         }
@@ -75,7 +77,7 @@ public class Tile : MonoBehaviour {
         //ToDo - insert failing animation
     }
 
-    public bool TryGrowTree()
+    public void TryGrowTree()
     {
         for (int i = -1; i < 2; i++)
         {
@@ -89,12 +91,29 @@ public class Tile : MonoBehaviour {
                 if (Board.Singleton.AllTiles[i,j].TileData.Tiletype == TileType.Building)
                 {
                     FailGrow();
-                    return false;
+                    return;
                 }
             }
         }
 
-        return true;
+        GrowTree();
+        return;
+    }
+
+    public void GrowTree()
+    {
+        ChangeTileType(TileType.Tree);
+
+    }
+
+    public void CutTree()
+    {
+        ChangeTileType(TileType.Clear);
+    }
+
+    public void BuildBuilding()
+    {
+        ChangeTileType(TileType.Building);
     }
 
     public void ChangeTileType(TileType newType)
