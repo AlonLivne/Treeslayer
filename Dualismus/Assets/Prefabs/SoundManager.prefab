@@ -111,9 +111,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fad9c5382aa430e4a892d1f39ad6f5b3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.27
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -206,9 +206,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8d4fe45815b4dee4bab666475d1c8db6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.73
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -302,3 +302,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TreeCut: {fileID: 1669166172822418, guid: 2fbd081106d948e4b9a7fed1c7919e66, type: 2}
+  Place: {fileID: 1378518827490180, guid: 2bb5299a190b93046879e5965781d9bc, type: 2}
+  CantPlace: {fileID: 1529654122049092, guid: 6f4fc45ef03283744953e8559ee0bd1d, type: 2}
