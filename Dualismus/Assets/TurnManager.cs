@@ -22,6 +22,7 @@ public class TurnManager : MonoBehaviour {
     private float _nightTimer;
     public int MaxTurns;
     private int _turn = 0;
+    public Texture2D AxeMouse;
 
     private void Awake()
     {
@@ -33,6 +34,17 @@ public class TurnManager : MonoBehaviour {
     void Start()
     {
         TurnState = TurnState.PlayerChooseTree;
+
+    }
+
+    public void MakeCursorAxe()
+    {
+        Cursor.SetCursor(AxeMouse, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void MakeCursorNormal()
+    {
+
     }
 
     public void TileClicked(Tile tile)
@@ -54,9 +66,7 @@ public class TurnManager : MonoBehaviour {
                     _buildingToPlace.PlaceBuildings();
                     Destroy(_buildingToPlace.gameObject);
                     Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
-                    Board.Singleton.EndTurn();
-
-                    
+                    Board.Singleton.EndTurn();                  
                 }
 
                 break;

@@ -54,5 +54,7 @@ MonoBehaviour:
   TurnState: 0
   BuilduingToPlacePrefab: {fileID: 114346550996391462, guid: 8d694662ef6e80540a2a5cb2483376e1,
     type: 2}
-  NightTime: 5
+  Night: {fileID: 212392131042819088, guid: 34b840b92bf53a2489d72ec5adbccdce, type: 2}
+  NightTime: 1
   MaxTurns: 5
+  AxeMouse: {fileID: 2800000, guid: caf6c4afd9949894bb01c125dedd09aa, type: 3}
