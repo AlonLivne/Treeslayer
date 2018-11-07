@@ -60,9 +60,7 @@ public class TurnManager : MonoBehaviour {
                     _buildingToPlace.PlaceBuildings();
                     Destroy(_buildingToPlace.gameObject);
                     Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
-                    Board.Singleton.EndTurn();
-
-                    
+                    Board.Singleton.EndTurn();    
                 }
 
                 break;
@@ -79,6 +77,7 @@ public class TurnManager : MonoBehaviour {
         switch (TurnState)
         { 
             case (TurnState.PlayerChooseRowOrColoumn):
+                SoundManager.Singleton.MakeTreeCutSound();
                 var citySize = Board.Singleton.CutTrees(_chosenTile, isHorizontal);
                 PlayerChoosePlaceForBuilding(citySize);
 
