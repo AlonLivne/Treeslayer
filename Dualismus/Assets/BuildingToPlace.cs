@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,7 +55,7 @@ public class BuildingToPlace : MonoBehaviour {
         Buildings = new List<GameObject>();
     }
 
-    private void MoveToCloseTile()
+    public Tile GetClosest()
     {
         Tile closest = null;
         for (int i = 0; i < Board.Singleton.TileCountX; i++)
@@ -82,10 +83,17 @@ public class BuildingToPlace : MonoBehaviour {
             }
         }
 
+        return closest;
+    }
+
+    private void MoveToCloseTile()
+    {
+        var closest = GetClosest();
+
         Holder.transform.position = closest.transform.position;
-        Color color = Color.red;
         for (int i = 0; i < Buildings.Count; i++)
         {
+            Color color = IsLegalForBuilding(closest, i) ? Color.white : Color.red;
             Buildings[i].GetComponent<SpriteRenderer>().color = color;
             var sortingOrder = closest.TileData.Y * 10 + 1;
             if (!_isHorizontal)
@@ -96,6 +104,45 @@ public class BuildingToPlace : MonoBehaviour {
         }
 
     }
+
+    public bool IsLegalForBuildings()
+    {
+        var closest = GetClosest();
+        for (int i = 0; i < Buildings.Count; i++)
+        {
+            if (!IsLegalForBuilding(closest, i))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool IsLegalForBuilding(Tile closest, int index)
+    {
+        var x = closest.TileData.X;
+        var y = closest.TileData.Y;
+
+        if (_isHorizontal)
+        {
+            x += index;
+        }
+        else
+        {
+            y += index;
+        }
+
+        var tile = Board.Singleton.GetTile(x, y);
+        if (tile == null)
+        {
+            return false;
+        }
+
+        return tile.IsLegalForBuilding();
+
+    }
+
 
     // Use this for initialization
     void Start () {

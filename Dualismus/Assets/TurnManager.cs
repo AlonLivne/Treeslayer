@@ -42,18 +42,13 @@ public class TurnManager : MonoBehaviour {
                 break;
 
             case (TurnState.PlayerChoosePlaceForBuilding):
-                if (tile.TileData.Tiletype == TileType.Clear)
+                if (IsLegalPlaceForBuilding())
                 {
-
-                    if (IsLegalPlaceForBuilding(_chosenTile))
-                    {
-                        Board.Singleton.PlaceBuildings(_buildingToPlace);
-                        TurnState = TurnState.TreesTurn;
-                    }
-
-
+                    Board.Singleton.PlaceBuildings(_buildingToPlace);
+                    TurnState = TurnState.TreesTurn;
                     Board.Singleton.EndTurn();
                 }
+
                 break;
 
             default:
@@ -89,8 +84,8 @@ public class TurnManager : MonoBehaviour {
 
     }
 
-    public bool IsLegalPlaceForBuilding(Tile tile)
+    public bool IsLegalPlaceForBuilding()
     {
-        return true;
+        return _buildingToPlace.IsLegalForBuildings();
     }	
 }
