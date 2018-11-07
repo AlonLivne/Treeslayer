@@ -65,6 +65,7 @@ public class Board : MonoBehaviour {
             }
         }
 
+        PlaceStrtingTrees();
         /*This is to test visual of buildings
          * 
          * for (int i = 0; i < TreesStartingNumber; i++)
