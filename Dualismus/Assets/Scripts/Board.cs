@@ -17,6 +17,11 @@ public class Board : MonoBehaviour {
 
     public Tile TilePrefab;
 
+    public float GetTileSize()
+    {
+        return _tileSize;
+    }
+
     private void Awake()
     {
         _tileSize = BoardSize / TileCountX;
@@ -130,6 +135,10 @@ public class Board : MonoBehaviour {
 
     public int CutTrees(Tile tile, bool isHorizontal)
     {
+        if (tile == null)
+        {
+            return 0;
+        }
 
         Debug.Log("CutTrees");
 
@@ -157,6 +166,11 @@ public class Board : MonoBehaviour {
 
     public int CutTreesPositiveDirection(Tile tile, bool isHorizontal)
     {
+        if (tile == null)
+        {
+            return 0;
+        }
+
         if (tile.TileData.Tiletype != TileType.Tree)
         {
             return 0;
@@ -178,6 +192,11 @@ public class Board : MonoBehaviour {
 
     public int CutTreesNegativeDirection(Tile tile, bool isHorizontal)
     {
+        if (tile == null)
+        {
+            return 0;
+        }
+
         if (tile.TileData.Tiletype != TileType.Tree)
         {
             return 0;
@@ -200,7 +219,10 @@ public class Board : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEngine.Debug.Break();
+        }
 	}
 
 

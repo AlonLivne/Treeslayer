@@ -72,7 +72,7 @@ public class TurnManager : MonoBehaviour {
                 break;
 
             case (TurnState.PlayerChoosePlaceForBuilding):
-                _buildingToPlace.SyncVisual(isHorizontal);
+                _buildingToPlace.ChangeHorizontal(isHorizontal);
                 break;
 
             default:
