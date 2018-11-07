@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public enum TileType
 {
@@ -25,6 +26,7 @@ public class Tile : MonoBehaviour {
     public GameObject TreeVisualPrefab;
     public GameObject CityVisualPrefab;
     public GameObject BurntLandVisualPrefab;
+    public GameObject Sheep;
 
     private void Awake()
     {
@@ -75,6 +77,20 @@ public class Tile : MonoBehaviour {
             vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
         }
 
+        Sheep.SetActive(false);
+        if (TileData.Tiletype == TileType.Clear)
+        {
+            if (UnityEngine.Random.value < 0.10f)
+            {
+                Invoke("ShowSheep", UnityEngine.Random.value * 3);
+            }
+        }
+
+    }
+
+    public void ShowSheep()
+    {
+        Sheep.SetActive(true);
     }
 
     public void PlayTurn()
