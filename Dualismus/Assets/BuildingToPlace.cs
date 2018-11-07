@@ -45,6 +45,7 @@ public class BuildingToPlace : MonoBehaviour {
 
             Buildings[i].transform.position = 
                 Holder.transform.position + new Vector3(x, y, 0);
+
         }
     }
 
@@ -82,6 +83,18 @@ public class BuildingToPlace : MonoBehaviour {
         }
 
         Holder.transform.position = closest.transform.position;
+        Color color = Color.red;
+        for (int i = 0; i < Buildings.Count; i++)
+        {
+            Buildings[i].GetComponent<SpriteRenderer>().color = color;
+            var sortingOrder = closest.TileData.Y * 10 + 1;
+            if (!_isHorizontal)
+            {
+                sortingOrder += i * 10;
+            }
+            Buildings[i].GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;
+        }
+
     }
 
     // Use this for initialization
