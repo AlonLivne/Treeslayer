@@ -94,12 +94,22 @@ public class Board : MonoBehaviour {
     public void EndTurn()
     {
         var treeTiles = new List<Tile>();
+        var cutTiles = new List<Tile>();
         foreach (var tile in AllTiles)
         {
             if (tile.TileData.Tiletype == TileType.Tree)
             {
                 treeTiles.Add(tile);
             }
+            if (tile.TileData.Tiletype == TileType.CutThisTurn)
+            {
+                cutTiles.Add(tile);
+            }
+        }
+
+        foreach (var cutTile in cutTiles)
+        {
+            cutTile.ChangeTileType(TileType.Clear);
         }
 
         foreach (var tree in treeTiles)
@@ -138,7 +148,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTreesNegativeDirection(negativeNeighborTile, isHorizontal);
         ans += CutTreesPositiveDirection(positiveNeighborTile, isHorizontal);
@@ -159,7 +169,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTrees(neighborTile, isHorizontal);
         return ans;
@@ -181,7 +191,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTrees(neighborTile, isHorizontal);
         return ans;

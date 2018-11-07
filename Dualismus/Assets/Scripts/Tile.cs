@@ -8,6 +8,7 @@ public enum TileType
     Clear,
     Tree,
     Building,
+    CutThisTurn
 }
 
 [Serializable]
