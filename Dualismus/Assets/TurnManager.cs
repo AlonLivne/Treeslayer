@@ -21,6 +21,8 @@ public class TurnManager : MonoBehaviour {
     private float _nightTimer;
     public int MaxTurns;
     private int _turn = 0;
+    public GameObject Arrows;
+
 
     private void Awake()
     {
@@ -43,6 +45,10 @@ public class TurnManager : MonoBehaviour {
                 if (tile.TileData.Tiletype == TileType.Tree)
                 {
                     TurnState = TurnState.PlayerChooseRowOrColoumn;
+                    Arrows.SetActive(true);
+                    Arrows.transform.position =
+                        tile.transform.position + 
+                        new Vector3(0,0,-1);
                 }
                 break;
 
@@ -66,6 +72,7 @@ public class TurnManager : MonoBehaviour {
     public void RowOrColoumn(bool isHorizontal)
     {
 
+        Arrows.SetActive(false);
         switch (TurnState)
         { 
             case (TurnState.PlayerChooseRowOrColoumn):

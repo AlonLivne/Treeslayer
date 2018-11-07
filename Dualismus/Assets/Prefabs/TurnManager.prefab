@@ -54,3 +54,6 @@ MonoBehaviour:
   TurnState: 0
   BuilduingToPlacePrefab: {fileID: 114346550996391462, guid: 8d694662ef6e80540a2a5cb2483376e1,
     type: 2}
+  NightTime: 5
+  MaxTurns: 7
+  Arrows: {fileID: 0}

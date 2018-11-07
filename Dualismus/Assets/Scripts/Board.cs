@@ -17,6 +17,8 @@ public class Board : MonoBehaviour {
 
     public Tile TilePrefab;
 
+    public GameObject SelectedTile;
+
     public float GetTileSize()
     {
         return _tileSize;
@@ -54,15 +56,27 @@ public class Board : MonoBehaviour {
 
     private void SetUpBoard()
     {
+        bool selected = true;
         for (int i = 0; i<TileCountX; i++)
         {
             for (int j = 0; j < TileCountY; j++)
             {
+
+                selected = !selected;
+
                 AllTiles[i, j] = Instantiate(TilePrefab, TileHolder);
                 AllTiles[i, j].transform.position = GetWorldPosition(i, j);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
+                if (selected)
+                {
+                   var selectedItem = Instantiate(SelectedTile, transform);
+                    selectedItem.transform.position = GetWorldPosition(i, j);
+                }
+
 
             }
+
+            selected = !selected;
         }
 
         PlaceStrtingTrees();
