@@ -199,6 +199,11 @@ Prefab:
       propertyPath: Arrows
       value: 
       objectReference: {fileID: 1018921167}
+    - target: {fileID: 114245572831428946, guid: 2daa0c43bde364f48b1a346d04f4ccd4,
+        type: 2}
+      propertyPath: NightTime
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2daa0c43bde364f48b1a346d04f4ccd4, type: 2}
   m_IsPrefabAsset: 0
@@ -996,7 +1001,7 @@ Transform:
   - {fileID: 895811744}
   - {fileID: 2077012439}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148650750
 GameObject:
@@ -1194,7 +1199,7 @@ RectTransform:
   m_Children:
   - {fileID: 871664925}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1397,7 +1402,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946376693
 GameObject:
