@@ -8,6 +8,7 @@ public enum TileType
     Clear,
     Tree,
     Building,
+    CutThisTurn
 }
 
 [Serializable]
@@ -110,9 +111,8 @@ public class Tile : MonoBehaviour {
         //ToDo - insert failing animation
     }
 
-    public void TryGrowTree()
+    public bool IsNeighborBuilding()
     {
-
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
@@ -125,14 +125,23 @@ public class Tile : MonoBehaviour {
 
                 if (tile.TileData.Tiletype == TileType.Building)
                 {
-                    FailGrow();
-                    return;
+                    return true;
                 }
             }
         }
 
+        return false;
+    }
+
+    public void TryGrowTree()
+    {
+        if (IsNeighborBuilding())
+        {
+            FailGrow();
+            return;
+        }
+
         GrowTree();
-        return;
     }
 
     public void GrowTree()
@@ -155,5 +164,9 @@ public class Tile : MonoBehaviour {
         TileData.Tiletype = newType;
         SyncVisual();
     }
-    
+
+    public bool IsLegalForBuilding()
+    {
+
+    }
 }

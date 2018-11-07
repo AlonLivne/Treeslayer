@@ -65,6 +65,26 @@ public class Board : MonoBehaviour {
             }
         }
 
+        /*This is to test visual of buildings
+         * 
+         * for (int i = 0; i < TreesStartingNumber; i++)
+        {
+            int x = 0;
+            int y = 0;
+            do
+            {
+                x = Random.Range(0, TileCountX);
+                y = Random.Range(0, TileCountY);
+            }
+            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
+
+            AllTiles[x, y].ChangeTileType(TileType.Building);
+            
+        }*/
+    }
+
+    private void PlaceStrtingTrees()
+    {
         for (int i = 0; i < TreesStartingNumber; i++)
         {
             int x = 0;
@@ -79,40 +99,8 @@ public class Board : MonoBehaviour {
             AllTiles[x, y].ChangeTileType(TileType.Tree);
 
         }
-
-        for (int i = 0; i < TreesStartingNumber; i++)
-        {
-            int x = 0;
-            int y = 0;
-            do
-            {
-                x = Random.Range(0, TileCountX);
-                y = Random.Range(0, TileCountY);
-            }
-            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
-
-            AllTiles[x, y].ChangeTileType(TileType.Building);
-            
-        }
     }
 
-    public void EndTurn()
-    {
-        var treeTiles = new List<Tile>();
-        foreach (var tile in AllTiles)
-        {
-            if (tile.TileData.Tiletype == TileType.Tree)
-            {
-                treeTiles.Add(tile);
-            }
-        }
-
-        foreach (var tree in treeTiles)
-        {
-            tree.PlayTurn();
-        }
-    }
-    
     public Tile GetTile(int x, int y)
     {
         if (!IsIndexInBoard(x, y))
@@ -121,6 +109,39 @@ public class Board : MonoBehaviour {
         }
 
         return AllTiles[x, y];
+    }
+
+    public void PlaceBuildings(BuildingToPlace buildings)
+    {
+        EndTurn();
+    }
+
+    public void EndTurn()
+    {
+        var treeTiles = new List<Tile>();
+        var cutTiles = new List<Tile>();
+        foreach (var tile in AllTiles)
+        {
+            if (tile.TileData.Tiletype == TileType.Tree)
+            {
+                treeTiles.Add(tile);
+            }
+            if (tile.TileData.Tiletype == TileType.CutThisTurn)
+            {
+                cutTiles.Add(tile);
+            }
+        }
+
+        foreach (var cutTile in cutTiles)
+        {
+            cutTile.ChangeTileType(TileType.Clear);
+        }
+
+        foreach (var tree in treeTiles)
+        {
+            tree.PlayTurn();
+        }
+
     }
 
     public int CutTrees(Tile tile, bool isHorizontal)
@@ -147,7 +168,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTreesNegativeDirection(negativeNeighborTile, isHorizontal);
         ans += CutTreesPositiveDirection(positiveNeighborTile, isHorizontal);
@@ -173,7 +194,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTrees(neighborTile, isHorizontal);
         return ans;
@@ -200,7 +221,7 @@ public class Board : MonoBehaviour {
         }
         int ans = 1;
 
-        tile.ChangeTileType(TileType.Clear);
+        tile.ChangeTileType(TileType.CutThisTurn);
 
         ans += CutTrees(neighborTile, isHorizontal);
         return ans;

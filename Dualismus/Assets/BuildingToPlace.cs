@@ -105,7 +105,7 @@ public class BuildingToPlace : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(TurnManager.Singleton.TurnState == TurnState.PlayerChosePlaceForBuilding)
+        if(TurnManager.Singleton.TurnState == TurnState.PlayerChoosePlaceForBuilding)
         {
             var mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);

@@ -27,12 +27,12 @@ public class InputManager : MonoBehaviour {
         if (GetKeyUp(KeyCode.W) || GetKeyUp(KeyCode.S) 
             || GetKeyUp(KeyCode.UpArrow) || GetKeyUp(KeyCode.DownArrow))
         {
-            TurnManager.Singleton.KeyPressed(false);
+            TurnManager.Singleton.RowOrColoumn(false);
         }
         else if(GetKeyUp(KeyCode.A) || GetKeyUp(KeyCode.D)
             || GetKeyUp(KeyCode.LeftArrow) || GetKeyUp(KeyCode.RightArrow))
         {
-            TurnManager.Singleton.KeyPressed(true);
+            TurnManager.Singleton.RowOrColoumn(true);
         }
 
 

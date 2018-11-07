@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum TurnState
 {
-    PlayerChoseTree,
-    PlayerChoseRowOrColoumn,
+    PlayerChooseTree,
+    PlayerChooseRowOrColoumn,
     PlayerApprove,
-    PlayerChosePlaceForBuilding,
+    PlayerChoosePlaceForBuilding,
     TreesTurn
 }
 
@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        TurnState = TurnState.PlayerChoseTree;
+        TurnState = TurnState.PlayerChooseTree;
     }
 
     public void TileClicked(Tile tile)
@@ -34,22 +34,25 @@ public class TurnManager : MonoBehaviour {
         _chosenTile = tile;
         switch (TurnState)
         {
-            case (TurnState.PlayerChoseTree):
+            case (TurnState.PlayerChooseTree):
                 if (tile.TileData.Tiletype == TileType.Tree)
                 {
-                    TurnState = TurnState.PlayerChoseRowOrColoumn;
+                    TurnState = TurnState.PlayerChooseRowOrColoumn;
                 }
                 break;
 
-            case (TurnState.PlayerChosePlaceForBuilding):
+            case (TurnState.PlayerChoosePlaceForBuilding):
                 if (tile.TileData.Tiletype == TileType.Clear)
                 {
 
                     if (IsLegalPlaceForBuilding(_chosenTile))
                     {
-                        //ToDo - place building
-                        
+                        Board.Singleton.PlaceBuildings(_buildingToPlace);
+                        TurnState = TurnState.TreesTurn;
                     }
+
+
+                    Board.Singleton.EndTurn();
                 }
                 break;
 
@@ -58,18 +61,18 @@ public class TurnManager : MonoBehaviour {
         }
     }
 
-    public void KeyPressed(bool isHorizontal)
+    public void RowOrColoumn(bool isHorizontal)
     {
 
         switch (TurnState)
         { 
-            case (TurnState.PlayerChoseRowOrColoumn):
+            case (TurnState.PlayerChooseRowOrColoumn):
                 var citySize = Board.Singleton.CutTrees(_chosenTile, isHorizontal);
                 PlayerChoosePlaceForBuilding(citySize);
 
                 break;
 
-            case (TurnState.PlayerChosePlaceForBuilding):
+            case (TurnState.PlayerChoosePlaceForBuilding):
                 _buildingToPlace.ChangeHorizontal(isHorizontal);
                 break;
 
@@ -80,7 +83,7 @@ public class TurnManager : MonoBehaviour {
 
     public void PlayerChoosePlaceForBuilding(int size)
     {
-        TurnState = TurnState.PlayerChosePlaceForBuilding;
+        TurnState = TurnState.PlayerChoosePlaceForBuilding;
         _buildingToPlace = Instantiate(BuilduingToPlacePrefab);
         _buildingToPlace.Init(size);
 
