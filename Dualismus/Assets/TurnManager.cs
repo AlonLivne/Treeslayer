@@ -47,11 +47,12 @@ public class TurnManager : MonoBehaviour {
 
                     if (IsLegalPlaceForBuilding(_chosenTile))
                     {
-                        
-                        
+                        Board.Singleton.PlaceBuildings(_buildingToPlace);
+                        TurnState = TurnState.TreesTurn;
                     }
 
-                    TurnState = TurnState.TreesTurn;
+
+                    Board.Singleton.EndTurn();
                 }
                 break;
 

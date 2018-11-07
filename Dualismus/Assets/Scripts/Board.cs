@@ -65,6 +65,26 @@ public class Board : MonoBehaviour {
             }
         }
 
+        /*This is to test visual of buildings
+         * 
+         * for (int i = 0; i < TreesStartingNumber; i++)
+        {
+            int x = 0;
+            int y = 0;
+            do
+            {
+                x = Random.Range(0, TileCountX);
+                y = Random.Range(0, TileCountY);
+            }
+            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
+
+            AllTiles[x, y].ChangeTileType(TileType.Building);
+            
+        }*/
+    }
+
+    private void PlaceStrtingTrees()
+    {
         for (int i = 0; i < TreesStartingNumber; i++)
         {
             int x = 0;
@@ -79,21 +99,21 @@ public class Board : MonoBehaviour {
             AllTiles[x, y].ChangeTileType(TileType.Tree);
 
         }
+    }
 
-        for (int i = 0; i < TreesStartingNumber; i++)
+    public Tile GetTile(int x, int y)
+    {
+        if (!IsIndexInBoard(x, y))
         {
-            int x = 0;
-            int y = 0;
-            do
-            {
-                x = Random.Range(0, TileCountX);
-                y = Random.Range(0, TileCountY);
-            }
-            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
-
-            AllTiles[x, y].ChangeTileType(TileType.Building);
-            
+            return null;
         }
+
+        return AllTiles[x, y];
+    }
+
+    public void PlaceBuildings(BuildingToPlace buildings)
+    {
+        EndTurn();
     }
 
     public void EndTurn()
@@ -121,16 +141,7 @@ public class Board : MonoBehaviour {
         {
             tree.PlayTurn();
         }
-    }
-    
-    public Tile GetTile(int x, int y)
-    {
-        if (!IsIndexInBoard(x, y))
-        {
-            return null;
-        }
 
-        return AllTiles[x, y];
     }
 
     public int CutTrees(Tile tile, bool isHorizontal)
