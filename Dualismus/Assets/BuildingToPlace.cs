@@ -53,6 +53,37 @@ public class BuildingToPlace : MonoBehaviour {
         Buildings = new List<GameObject>();
     }
 
+    private void MoveToCloseTile()
+    {
+        Tile closest = null;
+        for (int i = 0; i < Board.Singleton.TileCountX; i++)
+        {
+            for (int j = 0; j < Board.Singleton.TileCountY; j++)
+            {
+                var tile = Board.Singleton.AllTiles[i, j];
+                if (tile == null)
+                {
+                    continue;
+                }
+
+                if (closest == null)
+                {
+                    closest = tile;
+                    continue;
+                }
+
+                if (Vector3.Distance(tile.transform.position, transform.position) <
+                    Vector3.Distance(closest.transform.position, transform.position))
+                {
+                    closest = tile;
+                    continue;
+                }
+            }
+        }
+
+        Holder.transform.position = closest.transform.position;
+    }
+
     // Use this for initialization
     void Start () {
 		
@@ -67,5 +98,7 @@ public class BuildingToPlace : MonoBehaviour {
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             transform.position = Vector2.Lerp(transform.position, mousePosition, _moveSpeed);
         }
+
+	    MoveToCloseTile();
 	}
 }
