@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876d96adbf3033e469ee5f7fc4f5afe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurnState: 0
+  TurnState: 4
   BuilduingToPlacePrefab: {fileID: 114346550996391462, guid: 8d694662ef6e80540a2a5cb2483376e1,
     type: 2}
   Night: {fileID: 212392131042819088, guid: 34b840b92bf53a2489d72ec5adbccdce, type: 2}
-  NightTime: 1
+  NightTime: 3
   MaxTurns: 5
-  Arrows: {fileID: 0}
+  AxeMouse: {fileID: 2800000, guid: caf6c4afd9949894bb01c125dedd09aa, type: 3}

@@ -22,8 +22,7 @@ public class TurnManager : MonoBehaviour {
     private float _nightTimer;
     public int MaxTurns;
     private int _turn = 0;
-    public GameObject Arrows;
-
+    public Texture2D AxeMouse;
 
     private void Awake()
     {
@@ -35,6 +34,17 @@ public class TurnManager : MonoBehaviour {
     void Start()
     {
         TurnState = TurnState.PlayerChooseTree;
+        MakeCursorAxe();
+    }
+
+    public void MakeCursorAxe()
+    {
+        Cursor.SetCursor(AxeMouse, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void MakeCursorNormal()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     public void TileClicked(Tile tile)
@@ -46,21 +56,18 @@ public class TurnManager : MonoBehaviour {
                 if (tile.TileData.Tiletype == TileType.Tree)
                 {
                     TurnState = TurnState.PlayerChooseRowOrColoumn;
-                    Arrows.SetActive(true);
-                    Arrows.transform.position =
-                        tile.transform.position + 
-                        new Vector3(0,0,-1);
                 }
                 break;
 
             case (TurnState.PlayerChoosePlaceForBuilding):
                 if (IsLegalPlaceForBuilding())
                 {
+                    MakeCursorNormal();
                     TurnState = TurnState.TreesTurn;
                     _buildingToPlace.PlaceBuildings();
                     Destroy(_buildingToPlace.gameObject);
                     Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
-                    Board.Singleton.EndTurn();    
+                    Board.Singleton.EndTurn();                  
                 }
 
                 break;
@@ -73,11 +80,9 @@ public class TurnManager : MonoBehaviour {
     public void RowOrColoumn(bool isHorizontal)
     {
 
-        Arrows.SetActive(false);
         switch (TurnState)
         { 
             case (TurnState.PlayerChooseRowOrColoumn):
-                SoundManager.Singleton.MakeTreeCutSound();
                 var citySize = Board.Singleton.CutTrees(_chosenTile, isHorizontal);
                 PlayerChoosePlaceForBuilding(citySize);
 
@@ -94,7 +99,10 @@ public class TurnManager : MonoBehaviour {
 
     public void PlayerChoosePlaceForBuilding(int size)
     {
+
         TurnState = TurnState.PlayerChoosePlaceForBuilding;
+        MakeCursorNormal();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         _buildingToPlace = Instantiate(BuilduingToPlacePrefab);
         _buildingToPlace.Init(size);
 
@@ -115,7 +123,6 @@ public class TurnManager : MonoBehaviour {
         if(TurnState == TurnState.TreesTurn)
         {
 
-
             _nightTimer -= Time.deltaTime;
             if (_nightTimer < 1)
             {
@@ -130,6 +137,7 @@ public class TurnManager : MonoBehaviour {
                     return;
                 }
                 TurnState = TurnState.PlayerChooseTree;
+                MakeCursorAxe();
                 _nightTimer = NightTime;
             }
         }

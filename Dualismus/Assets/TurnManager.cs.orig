@@ -17,16 +17,39 @@ public class TurnManager : MonoBehaviour {
     private Tile _chosenTile;
     public BuildingToPlace BuilduingToPlacePrefab;
     private BuildingToPlace _buildingToPlace;
+    public SpriteRenderer Night;
+    public float NightTime = 5f;
+    private float _nightTimer;
+    public int MaxTurns;
+    private int _turn = 0;
+<<<<<<< HEAD
+    public Texture2D AxeMouse;
+=======
+    public GameObject Arrows;
+
+>>>>>>> 4d0102b1efe36ca7573f3c07b4f5dfadd28e823f
 
     private void Awake()
     {
         Singleton = this;
+        _nightTimer = NightTime;
     }
 
     // Use this for initialization
     void Start()
     {
         TurnState = TurnState.PlayerChooseTree;
+
+    }
+
+    public void MakeCursorAxe()
+    {
+        Cursor.SetCursor(AxeMouse, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void MakeCursorNormal()
+    {
+
     }
 
     public void TileClicked(Tile tile)
@@ -38,21 +61,27 @@ public class TurnManager : MonoBehaviour {
                 if (tile.TileData.Tiletype == TileType.Tree)
                 {
                     TurnState = TurnState.PlayerChooseRowOrColoumn;
+                    Arrows.SetActive(true);
+                    Arrows.transform.position =
+                        tile.transform.position + 
+                        new Vector3(0,0,-1);
                 }
                 break;
 
             case (TurnState.PlayerChoosePlaceForBuilding):
-                if (tile.TileData.Tiletype == TileType.Clear)
+                if (IsLegalPlaceForBuilding())
                 {
-
-                    if (IsLegalPlaceForBuilding(_chosenTile))
-                    {
-                        
-                        
-                    }
-
                     TurnState = TurnState.TreesTurn;
+                    _buildingToPlace.PlaceBuildings();
+                    Destroy(_buildingToPlace.gameObject);
+                    Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
+<<<<<<< HEAD
+                    Board.Singleton.EndTurn();                  
+=======
+                    Board.Singleton.EndTurn();    
+>>>>>>> 4d0102b1efe36ca7573f3c07b4f5dfadd28e823f
                 }
+
                 break;
 
             default:
@@ -63,21 +92,18 @@ public class TurnManager : MonoBehaviour {
     public void RowOrColoumn(bool isHorizontal)
     {
 
+        Arrows.SetActive(false);
         switch (TurnState)
         { 
             case (TurnState.PlayerChooseRowOrColoumn):
+                SoundManager.Singleton.MakeTreeCutSound();
                 var citySize = Board.Singleton.CutTrees(_chosenTile, isHorizontal);
                 PlayerChoosePlaceForBuilding(citySize);
 
                 break;
 
-<<<<<<< HEAD
             case (TurnState.PlayerChoosePlaceForBuilding):
-                _buildingToPlace.SyncVisual(isHorizontal);
-=======
-            case (TurnState.PlayerChosePlaceForBuilding):
                 _buildingToPlace.ChangeHorizontal(isHorizontal);
->>>>>>> ac99bf10f8dbf5abc53c80e75442489e48589a25
                 break;
 
             default:
@@ -93,8 +119,38 @@ public class TurnManager : MonoBehaviour {
 
     }
 
-    public bool IsLegalPlaceForBuilding(Tile tile)
+    public bool IsLegalPlaceForBuilding()
     {
-        return true;
-    }	
+        return _buildingToPlace.IsLegalForBuildings();
+    }
+
+    public void FinishGame()
+    {
+
+    }
+
+    private void Update()
+    {
+        if(TurnState == TurnState.TreesTurn)
+        {
+
+
+            _nightTimer -= Time.deltaTime;
+            if (_nightTimer < 1)
+            {
+                Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, _nightTimer );
+            }
+            if (_nightTimer < 0)
+            {
+                _turn++;
+                if (_turn >= MaxTurns)
+                {
+                    FinishGame();
+                    return;
+                }
+                TurnState = TurnState.PlayerChooseTree;
+                _nightTimer = NightTime;
+            }
+        }
+    }
 }
