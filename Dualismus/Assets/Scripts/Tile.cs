@@ -53,13 +53,13 @@ public class Tile : MonoBehaviour {
         if (TileData.Tiletype == TileType.Tree)
         {
             var vis = Instantiate(TreeVisualPrefab, Holder);
-            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y;
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
             
         }
         else if (TileData.Tiletype == TileType.Building)
         {
             var vis = Instantiate(CityVisualPrefab, Holder);
-            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y;
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
         }
 
     }
