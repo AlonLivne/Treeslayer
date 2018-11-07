@@ -87,7 +87,7 @@ MonoBehaviour:
     type: 2}
   Night: {fileID: 212470489880933400}
   NightTime: 3
-  MaxTurns: 5
+  MaxTurns: 8
   Arrows: {fileID: 0}
 --- !u!212 &212470489880933400
 SpriteRenderer:
