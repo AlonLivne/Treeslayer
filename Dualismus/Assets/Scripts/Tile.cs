@@ -117,7 +117,7 @@ public class Tile : MonoBehaviour {
         {
             for (int j = -1; j < 2; j++)
             {
-                var tile = Board.Singleton.GetTile(i, j);
+                var tile = Board.Singleton.GetTile(TileData.X + i, TileData.Y + j);
                 if (tile == null)
                 {
                     continue;

@@ -17,10 +17,15 @@ public class TurnManager : MonoBehaviour {
     private Tile _chosenTile;
     public BuildingToPlace BuilduingToPlacePrefab;
     private BuildingToPlace _buildingToPlace;
+    public float NightTime = 5f;
+    private float _nightTimer;
+    public int MaxTurns;
+    private int _turn = 0;
 
     private void Awake()
     {
         Singleton = this;
+        _nightTimer = NightTime;
     }
 
     // Use this for initialization
@@ -44,9 +49,11 @@ public class TurnManager : MonoBehaviour {
             case (TurnState.PlayerChoosePlaceForBuilding):
                 if (IsLegalPlaceForBuilding())
                 {
-                    Board.Singleton.PlaceBuildings(_buildingToPlace);
                     TurnState = TurnState.TreesTurn;
+                    _buildingToPlace.PlaceBuildings();
+                    Destroy(_buildingToPlace.gameObject);
                     Board.Singleton.EndTurn();
+                    
                 }
 
                 break;
@@ -87,5 +94,29 @@ public class TurnManager : MonoBehaviour {
     public bool IsLegalPlaceForBuilding()
     {
         return _buildingToPlace.IsLegalForBuildings();
-    }	
+    }
+
+    public void FinishGame()
+    {
+
+    }
+
+    private void Update()
+    {
+        if(TurnState == TurnState.TreesTurn)
+        {
+            _nightTimer -= Time.deltaTime;
+            if (_nightTimer < 0)
+            {
+                _turn++;
+                if (_turn >= MaxTurns)
+                {
+                    FinishGame();
+                    return;
+                }
+                TurnState = TurnState.PlayerChooseTree;
+                _nightTimer = NightTime;
+            }
+        }
+    }
 }
