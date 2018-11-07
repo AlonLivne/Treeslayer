@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1624934047878078}
+  m_IsPrefabAsset: 1
+--- !u!1 &1624934047878078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4546312148991640}
+  - component: {fileID: 114121122229066078}
+  m_Layer: 0
+  m_Name: VisualMediator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4546312148991640
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624934047878078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114121122229066078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624934047878078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95338133270e367468877d9c67b811c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TreeVisuals:
+  - {fileID: 1174929482202752, guid: 11c53df4f929b3e4db8d654645fbf954, type: 2}
+  - {fileID: 1119483568853968, guid: 0e67262933b20fc4cbe1599e6bee42e1, type: 2}
+  - {fileID: 1028610510253302, guid: b2dc40938eea3174e95eabadf3375958, type: 2}
+  BuildingsVisuals:
+  - {fileID: 1425249522928276, guid: 034b74413c398d44fbd4f2664ca6e285, type: 2}
+  - {fileID: 1201487618341214, guid: d4a29ff479db905498959f3305869091, type: 2}
+  - {fileID: 1595020258552998, guid: 83029fa4eff0b35439b76052cd6afaa9, type: 2}
+  OverLayVisuals:
+  - {fileID: 1608775411786752, guid: a0c4161a9e1e0624b9dacb14c07ab49d, type: 2}
+  - {fileID: 1266352600149280, guid: ac0d974dcc950c24a817306942495dc8, type: 2}
+  - {fileID: 1702298886019496, guid: 94d5efaeb977ef24a95603542d92b0ef, type: 2}

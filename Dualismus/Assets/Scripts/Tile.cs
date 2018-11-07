@@ -24,15 +24,22 @@ public class Tile : MonoBehaviour {
     public Transform Holder;
     public GameObject TreeVisualPrefab;
     public GameObject CityVisualPrefab;
+    public GameObject BurntLandVisualPrefab;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    private void Awake()
+    {
+        TreeVisualPrefab = VisualsMediator.Singleton.GetVisual(Visuals.Trees);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     public void Init(int x, int y, TileType type)
@@ -60,6 +67,11 @@ public class Tile : MonoBehaviour {
         else if (TileData.Tiletype == TileType.Building)
         {
             var vis = Instantiate(CityVisualPrefab, Holder);
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
+        }
+        else if (TileData.Tiletype == TileType.CutThisTurn)
+        {
+            var vis = Instantiate(BurntLandVisualPrefab, Holder);
             vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
         }
 

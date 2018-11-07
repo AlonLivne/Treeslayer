@@ -93,7 +93,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.75, y: 1.66}
+  m_Size: {x: 1.8, y: 1.8}
   m_EdgeRadius: 0
 --- !u!114 &114158348824273430
 MonoBehaviour:
@@ -114,4 +114,6 @@ MonoBehaviour:
   TreeVisualPrefab: {fileID: 1374841878240108, guid: f2cc28be84d9b88458147c50bf80aa86,
     type: 2}
   CityVisualPrefab: {fileID: 1029078632607740, guid: 9ae494755bcc9c54aa36dd359f7930a3,
+    type: 2}
+  BurntLandVisualPrefab: {fileID: 1691429385412110, guid: e831acbb6b1b26e46ac94991607ac75b,
     type: 2}
