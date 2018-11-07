@@ -88,6 +88,7 @@ MonoBehaviour:
   NightTime: 3
   MaxTurns: 5
   Arrows: {fileID: 0}
+  Axe: {fileID: 2800000, guid: 6b4b09a14c4eaf546a0c790d58173854, type: 3}
 --- !u!212 &212470489880933400
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -124,7 +125,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: facf59d8344fab24392da58e0d228438, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

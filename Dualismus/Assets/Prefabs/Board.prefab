@@ -114,9 +114,10 @@ MonoBehaviour:
   BoardSize: 40
   TileCountX: 8
   TileCountY: 8
-  TreesStartingNumber: 5
-  VisualMediatorPrefab: {fileID: 0}
+  TreesStartingNumber: 7
   TilePrefab: {fileID: 114158348824273430, guid: 0f0573154dc20954cb9d51655c6a587e,
+    type: 2}
+  SelectedTile: {fileID: 1644504710429314, guid: d6ae8fce05d075f45a4f0d43c4dc23c5,
     type: 2}
 --- !u!212 &212966837746435332
 SpriteRenderer:

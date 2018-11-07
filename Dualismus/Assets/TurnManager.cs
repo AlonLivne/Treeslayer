@@ -23,7 +23,7 @@ public class TurnManager : MonoBehaviour {
     public int MaxTurns;
     private int _turn = 0;
     public GameObject Arrows;
-
+    public Texture2D Axe;
 
 
     private void Awake()
@@ -36,6 +36,17 @@ public class TurnManager : MonoBehaviour {
     void Start()
     {
         TurnState = TurnState.PlayerChooseTree;
+        MakeCursoeAxe();
+    }
+
+    private void MakeCursoeAxe()
+    {
+        Cursor.SetCursor(Axe, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    private void MakeCursorNormal()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     public void TileClicked(Tile tile)
@@ -101,6 +112,7 @@ public class TurnManager : MonoBehaviour {
     public void PlayerChoosePlaceForBuilding(int size)
     {
         TurnState = TurnState.PlayerChoosePlaceForBuilding;
+        MakeCursorNormal();
         _buildingToPlace = Instantiate(BuilduingToPlacePrefab);
         _buildingToPlace.Init(size);
     }
@@ -135,6 +147,7 @@ public class TurnManager : MonoBehaviour {
                     return;
                 }
                 TurnState = TurnState.PlayerChooseTree;
+                MakeCursoeAxe();
                 _nightTimer = NightTime;
             }
         }
