@@ -39,7 +39,7 @@ public class TurnManager : MonoBehaviour {
 
     public void MakeCursorAxe()
     {
-        Cursor.SetCursor(AxeMouse, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(AxeMouse, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void MakeCursorNormal()
