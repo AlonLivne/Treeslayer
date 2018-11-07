@@ -40,7 +40,7 @@ public class BuildingToPlace : MonoBehaviour {
             }
             else
             {
-                y = i * Board.Singleton.GetTileSize();
+                y = - i * Board.Singleton.GetTileSize();
             }
 
             Buildings[i].transform.position = 
