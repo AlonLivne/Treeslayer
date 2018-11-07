@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876d96adbf3033e469ee5f7fc4f5afe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Axe: {fileID: 2800000, guid: 6b4b09a14c4eaf546a0c790d58173854, type: 3}
   TurnState: 0
   BuilduingToPlacePrefab: {fileID: 114346550996391462, guid: 8d694662ef6e80540a2a5cb2483376e1,
     type: 2}
@@ -88,7 +89,6 @@ MonoBehaviour:
   NightTime: 3
   MaxTurns: 5
   Arrows: {fileID: 0}
-  Axe: {fileID: 2800000, guid: 6b4b09a14c4eaf546a0c790d58173854, type: 3}
 --- !u!212 &212470489880933400
 SpriteRenderer:
   m_ObjectHideFlags: 1
