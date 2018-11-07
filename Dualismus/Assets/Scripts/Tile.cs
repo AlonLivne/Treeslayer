@@ -24,6 +24,7 @@ public class Tile : MonoBehaviour {
     public Transform Holder;
     public GameObject TreeVisualPrefab;
     public GameObject CityVisualPrefab;
+    public GameObject BurntLandVisualPrefab;
 
     private void Awake()
     {
@@ -66,6 +67,11 @@ public class Tile : MonoBehaviour {
         else if (TileData.Tiletype == TileType.Building)
         {
             var vis = Instantiate(CityVisualPrefab, Holder);
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
+        }
+        else if (TileData.Tiletype == TileType.CutThisTurn)
+        {
+            var vis = Instantiate(BurntLandVisualPrefab, Holder);
             vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y * 10;
         }
 

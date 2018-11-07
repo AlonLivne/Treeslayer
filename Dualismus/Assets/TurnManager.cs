@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour {
     private Tile _chosenTile;
     public BuildingToPlace BuilduingToPlacePrefab;
     private BuildingToPlace _buildingToPlace;
+    public SpriteRenderer Night;
     public float NightTime = 5f;
     private float _nightTimer;
     public int MaxTurns;
@@ -52,7 +53,9 @@ public class TurnManager : MonoBehaviour {
                     TurnState = TurnState.TreesTurn;
                     _buildingToPlace.PlaceBuildings();
                     Destroy(_buildingToPlace.gameObject);
+                    Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
                     Board.Singleton.EndTurn();
+
                     
                 }
 
@@ -105,7 +108,13 @@ public class TurnManager : MonoBehaviour {
     {
         if(TurnState == TurnState.TreesTurn)
         {
+
+
             _nightTimer -= Time.deltaTime;
+            if (_nightTimer < 1)
+            {
+                Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, _nightTimer );
+            }
             if (_nightTimer < 0)
             {
                 _turn++;
