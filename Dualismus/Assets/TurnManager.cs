@@ -25,6 +25,7 @@ public class TurnManager : MonoBehaviour {
     public GameObject Arrows;
 
 
+
     private void Awake()
     {
         Singleton = this;
