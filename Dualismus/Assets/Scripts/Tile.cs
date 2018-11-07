@@ -86,14 +86,15 @@ public class Tile : MonoBehaviour {
             destinationY = TileData.Y + UnityEngine.Random.Range(-1, 1);
         }
 
-        if (!Board.IsIndexInBoard(destinationX, destinationY) 
-            || Board.Singleton.AllTiles[destinationX, destinationY].TileData.Tiletype != TileType.Clear)
+        var tile = Board.Singleton.GetTile(destinationX, destinationY);
+        if (tile == null
+            || tile.TileData.Tiletype != TileType.Clear)
         {
             FailGrow();
             return;
         }
 
-        Board.Singleton.AllTiles[destinationX, destinationY].TryGrowTree();
+        tile.TryGrowTree();
 
     }
 
@@ -111,16 +112,18 @@ public class Tile : MonoBehaviour {
 
     public void TryGrowTree()
     {
+
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
             {
-                if (!Board.IsIndexInBoard(i, j))
+                var tile = Board.Singleton.GetTile(i, j);
+                if (tile == null)
                 {
                     continue;
                 }
 
-                if (Board.Singleton.AllTiles[i,j].TileData.Tiletype == TileType.Building)
+                if (tile.TileData.Tiletype == TileType.Building)
                 {
                     FailGrow();
                     return;

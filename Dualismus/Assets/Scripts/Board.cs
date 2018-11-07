@@ -107,6 +107,16 @@ public class Board : MonoBehaviour {
             tree.PlayTurn();
         }
     }
+    
+    public Tile GetTile(int x, int y)
+    {
+        if (!IsIndexInBoard(x, y))
+        {
+            return null;
+        }
+
+        return AllTiles[x, y];
+    }
 
     public int CutTrees(Tile tile, bool isHorizontal)
     {
@@ -118,12 +128,12 @@ public class Board : MonoBehaviour {
             return 0;
         }
 
-        var positiveNeighborTile = AllTiles[tile.TileData.X, tile.TileData.Y + 1];
-        var negativeNeighborTile = AllTiles[tile.TileData.X, tile.TileData.Y - 1];
+        var positiveNeighborTile = GetTile(tile.TileData.X, tile.TileData.Y + 1);
+        var negativeNeighborTile = GetTile(tile.TileData.X, tile.TileData.Y - 1);
         if (isHorizontal)
         {
-            positiveNeighborTile = AllTiles[tile.TileData.X + 1, tile.TileData.Y];
-            negativeNeighborTile = AllTiles[tile.TileData.X - 1, tile.TileData.Y];
+            positiveNeighborTile = GetTile(tile.TileData.X + 1, tile.TileData.Y);
+            negativeNeighborTile = GetTile(tile.TileData.X - 1, tile.TileData.Y);
 
         }
         int ans = 1;
@@ -142,10 +152,10 @@ public class Board : MonoBehaviour {
             return 0;
         }
 
-        var neighborTile = AllTiles[tile.TileData.X, tile.TileData.Y + 1];
+        var neighborTile = GetTile(tile.TileData.X, tile.TileData.Y + 1);
         if (isHorizontal)
         {
-            neighborTile = AllTiles[tile.TileData.X + 1, tile.TileData.Y];
+            neighborTile = GetTile(tile.TileData.X + 1, tile.TileData.Y);
         }
         int ans = 1;
 
@@ -163,10 +173,10 @@ public class Board : MonoBehaviour {
             return 0;
         }
 
-        var neighborTile = AllTiles[tile.TileData.X, tile.TileData.Y - 1];
+        var neighborTile = GetTile(tile.TileData.X, tile.TileData.Y - 1);
         if (isHorizontal)
         {
-            neighborTile = AllTiles[tile.TileData.X - 1, tile.TileData.Y];
+            neighborTile = GetTile(tile.TileData.X - 1, tile.TileData.Y);
 
         }
         int ans = 1;
