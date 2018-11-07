@@ -112,11 +112,6 @@ public class Board : MonoBehaviour {
         return AllTiles[x, y];
     }
 
-    public void PlaceBuildings(BuildingToPlace buildings)
-    {
-        EndTurn();
-    }
-
     public void EndTurn()
     {
         var treeTiles = new List<Tile>();
@@ -142,7 +137,6 @@ public class Board : MonoBehaviour {
         {
             tree.PlayTurn();
         }
-
     }
 
     public int CutTrees(Tile tile, bool isHorizontal)

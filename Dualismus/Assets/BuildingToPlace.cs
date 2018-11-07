@@ -143,6 +143,29 @@ public class BuildingToPlace : MonoBehaviour {
 
     }
 
+    public void PlaceBuildings()
+    {
+        var closest = GetClosest();
+        var x = closest.TileData.X;
+        var y = closest.TileData.Y;
+
+        for (int i = 0; i < Buildings.Count; i++)
+        {
+            var tile = Board.Singleton.GetTile(x, y);
+            tile.ChangeTileType(TileType.Building);
+
+            if (_isHorizontal)
+            {
+                x += 1;
+            }
+            else
+            {
+                y += 1;
+            }
+        }
+
+    }
+
 
     // Use this for initialization
     void Start () {
