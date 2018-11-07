@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4225925743702348}
   - component: {fileID: 114158348824273430}
+  - component: {fileID: 61685815955010728}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -50,7 +51,7 @@ Transform:
   m_GameObject: {fileID: 1491250225369504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.75, y: 2.75, z: 1}
   m_Children:
   - {fileID: 4871001369213644}
   m_Father: {fileID: 0}
@@ -69,6 +70,31 @@ Transform:
   m_Father: {fileID: 4225925743702348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61685815955010728
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491250225369504}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.09}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.66}
+  m_EdgeRadius: 0
 --- !u!114 &114158348824273430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,9 +107,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileData:
-    Coordinates: {x: 0, y: 0}
+    X: 0
+    Y: 0
     Tiletype: 0
   Holder: {fileID: 4871001369213644}
   TreeVisualPrefab: {fileID: 1374841878240108, guid: f2cc28be84d9b88458147c50bf80aa86,
     type: 2}
-  CityVisualPrefab: {fileID: 0}
+  CityVisualPrefab: {fileID: 1029078632607740, guid: 9ae494755bcc9c54aa36dd359f7930a3,
+    type: 2}

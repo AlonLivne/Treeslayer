@@ -20,7 +20,6 @@ public class TileData
 
 public class Tile : MonoBehaviour {
     public TileData TileData;
-
     public Transform Holder;
     public GameObject TreeVisualPrefab;
     public GameObject CityVisualPrefab;
@@ -53,7 +52,14 @@ public class Tile : MonoBehaviour {
 
         if (TileData.Tiletype == TileType.Tree)
         {
-            Instantiate(TreeVisualPrefab, transform);
+            var vis = Instantiate(TreeVisualPrefab, Holder);
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y;
+            
+        }
+        else if (TileData.Tiletype == TileType.Building)
+        {
+            var vis = Instantiate(CityVisualPrefab, Holder);
+            vis.GetComponent<SpriteRenderer>().sortingOrder = TileData.Y;
         }
 
     }
@@ -84,9 +90,17 @@ public class Tile : MonoBehaviour {
             || Board.Singleton.AllTiles[destinationX, destinationY].TileData.Tiletype != TileType.Clear)
         {
             FailGrow();
+            return;
         }
 
         Board.Singleton.AllTiles[destinationX, destinationY].TryGrowTree();
+
+    }
+
+    public void OnMouseUp()
+    {
+        TurnManager.Singleton.TileClicked(this);
+        Debug.Log(string.Format("{0} clicked", this.name.ToString()));
 
     }
 
@@ -101,7 +115,7 @@ public class Tile : MonoBehaviour {
         {
             for (int j = -1; j < 2; j++)
             {
-                if (Board.IsIndexInBoard(i, j))
+                if (!Board.IsIndexInBoard(i, j))
                 {
                     continue;
                 }

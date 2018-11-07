@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Board : MonoBehaviour {
 
-
-    public float BoardSize = 6f;
+    public Transform TileHolder;
+    public float BoardSize = 120f;
     private float _tileSize;
     public int TileCountX = 8;
     public int TileCountY = 8;
@@ -53,9 +53,10 @@ public class Board : MonoBehaviour {
         {
             for (int j = 0; j < TileCountY; j++)
             {
-                AllTiles[i, j] = Instantiate(TilePrefab, transform);
+                AllTiles[i, j] = Instantiate(TilePrefab, TileHolder);
+                AllTiles[i, j].transform.position = GetWorldPosition(i, j);
                 AllTiles[i, j].Init(i, j, TileType.Clear);
-                AllTiles[i, j].transform.position = GetWorldPosition(i,j);
+
             }
         }
 
@@ -72,6 +73,21 @@ public class Board : MonoBehaviour {
 
             AllTiles[x, y].ChangeTileType(TileType.Tree);
 
+        }
+
+        for (int i = 0; i < TreesStartingNumber; i++)
+        {
+            int x = 0;
+            int y = 0;
+            do
+            {
+                x = Random.Range(0, TileCountX);
+                y = Random.Range(0, TileCountY);
+            }
+            while (AllTiles[x, y].TileData.Tiletype != TileType.Clear);
+
+            AllTiles[x, y].ChangeTileType(TileType.Building);
+            
         }
     }
 
@@ -90,14 +106,81 @@ public class Board : MonoBehaviour {
         {
             tree.PlayTurn();
         }
+    }
 
+    public int CutTrees(Tile tile, bool isHorizontal)
+    {
+
+        Debug.Log("CutTrees");
+
+        if (!IsIndexInBoard(tile.TileData.X, tile.TileData.Y) || tile.TileData.Tiletype != TileType.Tree)
+        {
+            return 0;
+        }
+
+        var positiveNeighborTile = AllTiles[tile.TileData.X, tile.TileData.Y + 1];
+        var negativeNeighborTile = AllTiles[tile.TileData.X, tile.TileData.Y - 1];
+        if (isHorizontal)
+        {
+            positiveNeighborTile = AllTiles[tile.TileData.X + 1, tile.TileData.Y];
+            negativeNeighborTile = AllTiles[tile.TileData.X - 1, tile.TileData.Y];
+
+        }
+        int ans = 1;
+
+        tile.ChangeTileType(TileType.Clear);
+
+        ans += CutTreesNegativeDirection(negativeNeighborTile, isHorizontal);
+        ans += CutTreesPositiveDirection(positiveNeighborTile, isHorizontal);
+        return ans;
+    }
+
+    public int CutTreesPositiveDirection(Tile tile, bool isHorizontal)
+    {
+        if (tile.TileData.Tiletype != TileType.Tree)
+        {
+            return 0;
+        }
+
+        var neighborTile = AllTiles[tile.TileData.X, tile.TileData.Y + 1];
+        if (isHorizontal)
+        {
+            neighborTile = AllTiles[tile.TileData.X + 1, tile.TileData.Y];
+        }
+        int ans = 1;
+
+        tile.ChangeTileType(TileType.Clear);
+
+        ans += CutTrees(neighborTile, isHorizontal);
+        return ans;
 
     }
 
+    public int CutTreesNegativeDirection(Tile tile, bool isHorizontal)
+    {
+        if (tile.TileData.Tiletype != TileType.Tree)
+        {
+            return 0;
+        }
 
-	// Update is called once per frame
-	void Update () {
-		
+        var neighborTile = AllTiles[tile.TileData.X, tile.TileData.Y - 1];
+        if (isHorizontal)
+        {
+            neighborTile = AllTiles[tile.TileData.X - 1, tile.TileData.Y];
+
+        }
+        int ans = 1;
+
+        tile.ChangeTileType(TileType.Clear);
+
+        ans += CutTrees(neighborTile, isHorizontal);
+        return ans;
+    }
+
+
+    // Update is called once per frame
+    void Update () {
+
 	}
 
 
