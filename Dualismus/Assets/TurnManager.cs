@@ -25,6 +25,7 @@ public class TurnManager : MonoBehaviour {
     public GameObject Arrows;
 
 
+
     private void Awake()
     {
         Singleton = this;
@@ -56,11 +57,16 @@ public class TurnManager : MonoBehaviour {
             case (TurnState.PlayerChoosePlaceForBuilding):
                 if (IsLegalPlaceForBuilding())
                 {
+                    SoundManager.Singleton.MakePlaceSound();
                     TurnState = TurnState.TreesTurn;
                     _buildingToPlace.PlaceBuildings();
                     Destroy(_buildingToPlace.gameObject);
                     Night.color = new Color(Night.color.r, Night.color.g, Night.color.b, 1);
                     Board.Singleton.EndTurn();    
+                }
+                else
+                {
+                    SoundManager.Singleton.MakeCantPlaceSound();
                 }
 
                 break;
@@ -97,7 +103,6 @@ public class TurnManager : MonoBehaviour {
         TurnState = TurnState.PlayerChoosePlaceForBuilding;
         _buildingToPlace = Instantiate(BuilduingToPlacePrefab);
         _buildingToPlace.Init(size);
-
     }
 
     public bool IsLegalPlaceForBuilding()

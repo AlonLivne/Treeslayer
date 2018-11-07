@@ -7,6 +7,10 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Singleton;
     public GameObject TreeCut;
 
+    public GameObject Place;
+    public GameObject CantPlace;
+    public GameObject Play;
+
     void Awake()
     {
         Singleton = this;
@@ -17,6 +21,20 @@ public class SoundManager : MonoBehaviour
         Instantiate(TreeCut, transform);
     }
 
+    public void MakePlaceSound()
+    {
+        Instantiate(Place, transform);
+    }
+
+    public void MakeCantPlaceSound()
+    {
+        Instantiate(CantPlace, transform);
+    }
+
+    public void MakePlaySound()
+    {
+        Instantiate(Play, transform);
+    }
 
 
 
