@@ -167,6 +167,11 @@ public class Tile : MonoBehaviour {
 
     public bool IsLegalForBuilding()
     {
+        if (TileData.Tiletype != TileType.Clear || IsNeighborBuilding())
+        {
+            return false;
+        }
 
+        return true;
     }
 }
