@@ -7,38 +7,44 @@ public class BuildingToPlace : MonoBehaviour {
     public GameObject BuildingPrefab;
     public Transform Holder;
     private float _moveSpeed = 0.5f;
-    public bool IsHorizontal;
+    private bool _isHorizontal;
 
-    public void Init(int size, bool isHorizontal = true, float scale = 5)
+    public void Init(int size, bool isHorizontal = true)
     {
-        IsHorizontal = isHorizontal;
-
         for (int i = 0; i < size; i++)
         {
             var building = Instantiate(BuildingPrefab, Holder);
             Buildings.Add(building);
-            Buildings[i].transform.localScale = new Vector3(scale, scale, 1);
         }
 
-        SyncVisual(isHorizontal);
+        ChangeHorizontal(isHorizontal);
     }
 
-    public void SyncVisual(bool isHorizontal)
+    public void ChangeHorizontal(bool isHorizontal)
+    {
+        _isHorizontal = isHorizontal;
+        SyncVisual();
+    }
+
+    public void SyncVisual()
     {
         var size = 2f;
         for (int i = 0; i < Buildings.Count; i++)
         {
-            var x = Buildings[i].transform.position.x;
-            var y = Buildings[i].transform.localScale.y * i * size;
-            var z = 0;
+            float x = 0;
+            float y = 0;
 
-            if (IsHorizontal)
+            if (_isHorizontal)
             {
-                y = Buildings[i].transform.position.y;
-                x = Buildings[i].transform.localScale.x * i * size;
+                x = i * Board.Singleton.GetTileSize();
             }
-            Debug.Log(isHorizontal);
-            Buildings[i].transform.position = new Vector3(x, y, z);
+            else
+            {
+                y = i * Board.Singleton.GetTileSize();
+            }
+
+            Buildings[i].transform.position = 
+                Holder.transform.position + new Vector3(x, y, 0);
         }
     }
 
@@ -60,7 +66,6 @@ public class BuildingToPlace : MonoBehaviour {
             var mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             transform.position = Vector2.Lerp(transform.position, mousePosition, _moveSpeed);
-
         }
 	}
 }
