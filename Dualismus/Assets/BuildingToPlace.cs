@@ -7,6 +7,7 @@ public class BuildingToPlace : MonoBehaviour {
     private List<GameObject> Buildings;
     public GameObject BuildingPrefab;
     public Transform Holder;
+    public GameObject BuildingVisual;
     private float _moveSpeed = 0.5f;
     private bool _isHorizontal;
 
@@ -14,8 +15,8 @@ public class BuildingToPlace : MonoBehaviour {
     {
         for (int i = 0; i < size; i++)
         {
-            var building = Instantiate(BuildingPrefab, Holder);
-            Buildings.Add(building);
+            BuildingVisual = Instantiate(VisualsMediator.Singleton.GetVisual(Visuals.Buildings), Holder);
+            Buildings.Add(BuildingVisual);
         }
 
         ChangeHorizontal(isHorizontal);
@@ -152,6 +153,9 @@ public class BuildingToPlace : MonoBehaviour {
         for (int i = 0; i < Buildings.Count; i++)
         {
             var tile = Board.Singleton.GetTile(x, y);
+            Buildings[i].transform.position = Buildings[i].transform.position =
+                Holder.transform.position + new Vector3(0, 0, 0);
+            tile.CityVisualPrefab = (Buildings[i]);
             tile.ChangeTileType(TileType.Building);
 
             if (_isHorizontal)

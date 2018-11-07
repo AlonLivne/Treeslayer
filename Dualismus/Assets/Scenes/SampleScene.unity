@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &5871445
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546312148991640, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29dbb88a2cff8ef47910b6c1850c9c10, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &233044918
 Prefab:
   m_ObjectHideFlags: 0
@@ -196,8 +238,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114183128793886330, guid: e1f301eedd1a8384d9f212699bcf5ee8,
         type: 2}
-      propertyPath: TreesStartingNumber
-      value: 10
+      propertyPath: VisualMediatorPrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1f301eedd1a8384d9f212699bcf5ee8, type: 2}
@@ -272,7 +314,7 @@ SpriteRenderer:
   m_SortingLayerID: 1535931219
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 576b173ccff97774aa9f9aa0180f6ec7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4834096ae544eee418fe78f1a450e321, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -476,15 +518,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4460570324818228, guid: 5ca5968fff0b0e543b7a5b12e344ab80, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 16.598188
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4460570324818228, guid: 5ca5968fff0b0e543b7a5b12e344ab80, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -26.876753
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4460570324818228, guid: 5ca5968fff0b0e543b7a5b12e344ab80, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3.7047937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4460570324818228, guid: 5ca5968fff0b0e543b7a5b12e344ab80, type: 2}
       propertyPath: m_LocalRotation.x
@@ -688,7 +730,7 @@ SpriteRenderer:
   m_SortingLayerID: 1535931219
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 576b173ccff97774aa9f9aa0180f6ec7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8a4b3618e15f8f42b07d84f4b8bbd0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -796,7 +838,7 @@ SpriteRenderer:
   m_SortingLayerID: 1535931219
   m_SortingLayer: -2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 576b173ccff97774aa9f9aa0180f6ec7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4834096ae544eee418fe78f1a450e321, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

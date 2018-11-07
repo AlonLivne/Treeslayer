@@ -10,7 +10,6 @@ public class Board : MonoBehaviour {
     public int TileCountX = 8;
     public int TileCountY = 8;
     public int TreesStartingNumber = 5;
-
     public static Board Singleton;
 
     public Tile[,] AllTiles;
@@ -27,6 +26,10 @@ public class Board : MonoBehaviour {
         _tileSize = BoardSize / TileCountX;
         Singleton = this;
         AllTiles = new Tile[TileCountX , TileCountY];
+    }
+
+    public void OnVisualMeidatorCreated()
+    {
         SetUpBoard();
     }
 

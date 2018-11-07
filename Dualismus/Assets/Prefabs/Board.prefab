@@ -115,6 +115,7 @@ MonoBehaviour:
   TileCountX: 8
   TileCountY: 8
   TreesStartingNumber: 5
+  VisualMediatorPrefab: {fileID: 0}
   TilePrefab: {fileID: 114158348824273430, guid: 0f0573154dc20954cb9d51655c6a587e,
     type: 2}
 --- !u!212 &212966837746435332

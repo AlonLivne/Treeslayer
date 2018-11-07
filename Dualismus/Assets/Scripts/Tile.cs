@@ -25,14 +25,20 @@ public class Tile : MonoBehaviour {
     public GameObject TreeVisualPrefab;
     public GameObject CityVisualPrefab;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    private void Awake()
+    {
+        TreeVisualPrefab = VisualsMediator.Singleton.GetVisual(Visuals.Trees);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     public void Init(int x, int y, TileType type)
