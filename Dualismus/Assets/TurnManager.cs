@@ -13,6 +13,7 @@ public enum TurnState
 
 public class TurnManager : MonoBehaviour {
     public static TurnManager Singleton;
+    public Texture2D Axe;
     public TurnState TurnState;
     private Tile _chosenTile;
     public BuildingToPlace BuilduingToPlacePrefab;
@@ -23,7 +24,7 @@ public class TurnManager : MonoBehaviour {
     public int MaxTurns;
     private int _turn = 0;
     public GameObject Arrows;
-    public Texture2D Axe;
+
 
 
     private void Awake()
